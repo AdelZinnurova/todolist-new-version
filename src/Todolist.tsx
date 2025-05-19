@@ -1,3 +1,5 @@
+import {Button} from "./Button.tsx";
+
 type TodolistPropsType = {
     title: string
     tasks: TaskPropsType[]
@@ -15,7 +17,7 @@ export const Todolist = ({title, tasks}: TodolistPropsType) => {
         : <ul>
             {tasks.map(task => {
                 return (
-                    <li>
+                    <li key={task.id}>
                         <input type="checkbox" checked={task.isDone}/>
                         <span>{task.title}</span>
                     </li>
@@ -29,13 +31,13 @@ export const Todolist = ({title, tasks}: TodolistPropsType) => {
             <h3>{title}</h3>
             <div>
                 <input/>
-                <button>+</button>
+                <Button title={'+'}/>
             </div>
             {tasksList}
             <div>
-                <button>All</button>
-                <button>Active</button>
-                <button>Completed</button>
+                <Button title={'All'}/>
+                <Button title={'Active'}/>
+                <Button title={'Completed'}/>
             </div>
         </div>
     );

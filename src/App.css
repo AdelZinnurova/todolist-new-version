@@ -13,3 +13,7 @@
   background-color: #E6E6FA;
   padding: 10px;
 }
+
+.active-filter{
+  background-color: #FED6BC;
+}

@@ -1,6 +1,7 @@
 import {Button} from "./Button.tsx";
-import {ChangeEvent, useState} from "react";
+import {ChangeEvent} from "react";
 import {FilterValues} from "./App.tsx";
+import {CreateItemForm} from "./CreateItemForm.tsx";
 
 type TodolistPropsType = {
     title: string
@@ -31,7 +32,6 @@ export const Todolist = ({
                              changeTaskStatus,
                              deleteTodolist
                          }: TodolistPropsType) => {
-    const [taskTitle, setTaskTitle] = useState('')
 
     const tasksList = tasks.length === 0
         ? <span>Your list is empty</span>
@@ -57,6 +57,10 @@ export const Todolist = ({
             })}
         </ul>
 
+    const createTaskHandler = (title: string) => {
+        createTask(title, todolistId)
+    }
+
 
     return (
         <div className='todolist'>
@@ -67,25 +71,7 @@ export const Todolist = ({
                     onClick={() => deleteTodolist(todolistId)}
                 />
             </h3>
-            <div>
-                <input
-                    value={taskTitle}
-                    onChange={(event: ChangeEvent<HTMLInputElement>) => setTaskTitle(event.target.value)}
-                    onKeyDown={(event: React.KeyboardEvent<HTMLInputElement>) => {
-                        if (event.key === 'Enter') {
-                            createTask(taskTitle, todolistId)
-                            setTaskTitle('')
-                        }
-                    }}
-                />
-                <Button
-                    title={'+'}
-                    onClick={() => {
-                        createTask(taskTitle, todolistId)
-                        setTaskTitle('')
-                    }}
-                />
-            </div>
+            <CreateItemForm createItem={createTaskHandler}/>
             {tasksList}
             <div>
                 <Button className={filter === 'all' ? 'active-filter' : ''}

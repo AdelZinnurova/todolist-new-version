@@ -2,6 +2,8 @@ import './App.css'
 import {TaskType, Todolist} from "./Todolist.tsx";
 import {useState} from "react";
 import {v1} from "uuid";
+import {Button} from "./Button.tsx";
+import {CreateItemForm} from "./CreateItemForm.tsx";
 
 export type FilterValues = 'all' | 'active' | 'completed'
 
@@ -54,10 +56,6 @@ function App() {
         })
     }
 
-    const changeFilter = (filter: FilterValues, todolistId: string) => {
-        setTodolists(todolists.map(tl => tl.id === todolistId ? {...tl, filter: filter} : tl))
-    }
-
     const changeTaskStatus = (isDone: boolean, taskId: string, todolistId: string) => {
         setTasks({
             ...tasks,
@@ -69,6 +67,21 @@ function App() {
 
     const deleteTodolist = (todolistId: string) => {
         setTodolists(todolists.filter(tl => tl.id !== todolistId))
+    }
+
+    const changeFilter = (filter: FilterValues, todolistId: string) => {
+        setTodolists(todolists.map(tl => tl.id === todolistId ? {...tl, filter: filter} : tl))
+    }
+
+    const createTodolist = (title: string) => {
+        const newTodolistId = v1()
+        const newTodolist: TodolistType = {id: newTodolistId, title, filter: 'all'}
+        const newState = [...todolists, newTodolist]
+        setTodolists(newState)
+        setTasks({
+            ...tasks,
+            [newTodolistId]: []
+        })
     }
 
     // UI (view)
@@ -101,6 +114,7 @@ function App() {
 
     return (
         <div className="app">
+            <CreateItemForm createItem={createTodolist}/>
             {todolistComponents}
         </div>
     )

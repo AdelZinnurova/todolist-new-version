@@ -2,6 +2,7 @@ import {Button} from "./Button.tsx";
 import {ChangeEvent} from "react";
 import {FilterValues} from "./App.tsx";
 import {CreateItemForm} from "./CreateItemForm.tsx";
+import {EditableSpan} from "./EditableSpan.tsx";
 
 type TodolistPropsType = {
     title: string
@@ -13,6 +14,8 @@ type TodolistPropsType = {
     changeFilter: (filter: FilterValues, todolistId: string) => void
     changeTaskStatus: (isDone: boolean, taskId: string, todolistId: string) => void
     deleteTodolist: (todolistId: string) => void
+    changeTodolistTitle: (title: string, todolistId: string) => void
+    changeTaskTitle: (taskId: string, title: string, todolistId: string) => void
 }
 
 export type TaskType = {
@@ -30,13 +33,20 @@ export const Todolist = ({
                              createTask,
                              changeFilter,
                              changeTaskStatus,
-                             deleteTodolist
+                             deleteTodolist,
+                             changeTodolistTitle,
+                             changeTaskTitle
                          }: TodolistPropsType) => {
 
     const tasksList = tasks.length === 0
         ? <span>Your list is empty</span>
         : <ul>
             {tasks.map(task => {
+
+                const changeTaskTitleHandler = (title: string) => {
+                    changeTaskTitle(task.id, title, todolistId)
+                }
+
                 return (
                     <li key={task.id}>
                         <input
@@ -47,7 +57,7 @@ export const Todolist = ({
                                 changeTaskStatus(newStatusValue, task.id, todolistId)
                             }}
                         />
-                        <span>{task.title}</span>
+                        <EditableSpan title={task.title} changeTitle={changeTaskTitleHandler}/>
                         <Button
                             title={'x'}
                             onClick={() => deleteTasks(task.id, todolistId)}
@@ -61,11 +71,15 @@ export const Todolist = ({
         createTask(title, todolistId)
     }
 
+    const changeTodolistTitleHandler = (title: string) => {
+        changeTodolistTitle(title, todolistId)
+    }
+
 
     return (
         <div className='todolist'>
             <h3>
-                {title}
+                <EditableSpan title={title} changeTitle={changeTodolistTitleHandler}/>
                 <Button
                     title={'x'}
                     onClick={() => deleteTodolist(todolistId)}

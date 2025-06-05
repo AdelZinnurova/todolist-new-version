@@ -1,5 +1,5 @@
 import {ChangeEvent, type KeyboardEvent, useState} from "react";
-import {IconButton} from "@mui/material";
+import {IconButton, TextField} from "@mui/material";
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
 type CreateItemFormPropsType = {
@@ -26,7 +26,9 @@ export const CreateItemForm = ({createItem}: CreateItemFormPropsType) => {
 
     return (
         <div>
-            <input
+            <TextField
+                size="small"
+                variant="outlined"
                 value={itemTitle}
                 onChange={changeTitleHandler}
                 onKeyDown={createItemOnEnterHandler}

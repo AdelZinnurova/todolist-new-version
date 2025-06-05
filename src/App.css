@@ -1,11 +1,11 @@
-.app {
-  padding: 30px;
-  display: flex;
-}
+/*.app {*/
+/*  padding: 30px;*/
+/*  display: flex;*/
+/*}*/
 
-.app > div {
-  margin-right: 50px;
-}
+/*.app > div {*/
+/*  margin-right: 50px;*/
+/*}*/
 
 .todolist {
   border: 2px solid #FED6BC;

@@ -3,7 +3,7 @@ import {ChangeEvent} from "react";
 import {FilterValues} from "./App.tsx";
 import {CreateItemForm} from "./CreateItemForm.tsx";
 import {EditableSpan} from "./EditableSpan.tsx";
-import {Button, IconButton} from "@mui/material";
+import {Button, Checkbox, IconButton, List, ListItem} from "@mui/material";
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 
 type TodolistPropsType = {
@@ -42,7 +42,7 @@ export const Todolist = ({
 
     const tasksList = tasks.length === 0
         ? <span>Your list is empty</span>
-        : <ul>
+        : <List>
             {tasks.map(task => {
 
                 const changeTaskTitleHandler = (title: string) => {
@@ -50,9 +50,11 @@ export const Todolist = ({
                 }
 
                 return (
-                    <li key={task.id}>
-                        <input
-                            type="checkbox"
+                    <ListItem
+                        disablePadding
+                        key={task.id}>
+                        <Checkbox
+                            size="small"
                             checked={task.isDone}
                             onChange={(event: ChangeEvent<HTMLInputElement>) => {
                                 const newStatusValue = event.target.checked
@@ -63,10 +65,10 @@ export const Todolist = ({
                         <IconButton onClick={() => deleteTasks(task.id, todolistId)}>
                             <HighlightOffIcon/>
                         </IconButton>
-                    </li>
+                    </ListItem>
                 )
             })}
-        </ul>
+        </List>
 
     const createTaskHandler = (title: string) => {
         createTask(title, todolistId)
@@ -94,6 +96,7 @@ export const Todolist = ({
                     size="small"
                     disableElevation
                     color={filter === 'all' ? 'secondary' : 'primary'}
+                    sx={{m: "0 3px"}}
                 >
                     All
                 </Button>
@@ -103,6 +106,7 @@ export const Todolist = ({
                     size="small"
                     disableElevation
                     color={filter === 'active' ? 'secondary' : 'primary'}
+                    sx={{m: "0 3px"}}
                 >
                     Active
                 </Button>
@@ -112,6 +116,7 @@ export const Todolist = ({
                     size="small"
                     disableElevation
                     color={filter === 'completed' ? 'secondary' : 'primary'}
+                    sx={{m: "0 3px"}}
                 >
                     Completed
                 </Button>

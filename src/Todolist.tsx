@@ -3,8 +3,9 @@ import {ChangeEvent} from "react";
 import {FilterValues} from "./App.tsx";
 import {CreateItemForm} from "./CreateItemForm.tsx";
 import {EditableSpan} from "./EditableSpan.tsx";
-import {Button, Checkbox, IconButton, List, ListItem} from "@mui/material";
+import {Box, Button, Checkbox, IconButton, List, ListItem} from "@mui/material";
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import {containerSx, getListItemSx} from "./Todolist.styles.ts";
 
 type TodolistPropsType = {
     title: string
@@ -52,7 +53,9 @@ export const Todolist = ({
                 return (
                     <ListItem
                         disablePadding
-                        key={task.id}>
+                        key={task.id}
+                        sx={getListItemSx(task.isDone)}
+                    >
                         <Checkbox
                             size="small"
                             checked={task.isDone}
@@ -89,7 +92,7 @@ export const Todolist = ({
             </h3>
             <CreateItemForm createItem={createTaskHandler}/>
             {tasksList}
-            <div>
+            <Box sx={containerSx}>
                 <Button
                     onClick={() => changeFilter('all', todolistId)}
                     variant="contained"
@@ -120,7 +123,7 @@ export const Todolist = ({
                 >
                     Completed
                 </Button>
-            </div>
+            </Box>
         </div>
     );
 };

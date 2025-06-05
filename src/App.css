@@ -8,9 +8,9 @@
 /*}*/
 
 .app {
-  display: flex;
-  flex-direction: column;
-  width: 100vw;
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
 }
 
 
@@ -21,6 +21,10 @@
 /*  padding: 10px;*/
 /*}*/
 
-.active-filter{
-  background-color: #FED6BC;
+.active-filter {
+    background-color: #FED6BC;
+}
+
+.is-done {
+    opacity: 0.5;
 }

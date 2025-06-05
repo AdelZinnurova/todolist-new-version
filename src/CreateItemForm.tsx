@@ -1,5 +1,6 @@
 import {ChangeEvent, type KeyboardEvent, useState} from "react";
-import {Button} from "./Button.tsx";
+import {IconButton} from "@mui/material";
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
 type CreateItemFormPropsType = {
     createItem: (title: string) => void
@@ -30,10 +31,9 @@ export const CreateItemForm = ({createItem}: CreateItemFormPropsType) => {
                 onChange={changeTitleHandler}
                 onKeyDown={createItemOnEnterHandler}
             />
-            <Button
-                title={'+'}
-                onClick={createItemHandler}
-            />
+            <IconButton onClick={createItemHandler}>
+                <AddCircleOutlineIcon/>
+            </IconButton>
         </div>
     );
 };

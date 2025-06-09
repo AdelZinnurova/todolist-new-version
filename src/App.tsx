@@ -37,7 +37,7 @@ function App() {
     //     {id: todolistId_2, title: 'What to buy', filter: 'all'}
     // ])
 
-    let initialState: TodolistType[] = [
+    const initialState: TodolistType[] = [
         {id: todolistId_1, title: 'What to learn', filter: 'all'},
         {id: todolistId_2, title: 'What to buy', filter: 'all'}
     ]
@@ -108,7 +108,7 @@ function App() {
     }
 
     const changeTodolistTitle = (title: string, todolistId: string) => {
-       const action = changeTodolistTitleAC({id: todolistId, title})
+        const action = changeTodolistTitleAC({id: todolistId, title})
         despathTodolists(action)
     }
 
@@ -150,7 +150,7 @@ function App() {
         palette: {
             primary: indigo,
             secondary: amber,
-            mode: isDarkMode? 'dark' : 'light'
+            mode: isDarkMode ? 'dark' : 'light'
         },
     })
 

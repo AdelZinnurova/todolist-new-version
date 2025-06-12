@@ -1,4 +1,4 @@
-import {TasksStateType} from "../App.tsx";
+import {TasksStateType} from "../app/App.tsx";
 import {CreateTodolistActionType, DeleteTodolistActionType} from "./todolists-reducer.ts";
 import {v1} from "uuid";
 

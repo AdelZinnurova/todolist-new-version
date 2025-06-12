@@ -1,26 +1,28 @@
 import './App.css'
-import {TaskType, Todolist} from "./Todolist.tsx";
+import {TaskType, Todolist} from "../Todolist.tsx";
 import {useState} from "react";
-import {CreateItemForm} from "./CreateItemForm.tsx";
+import {CreateItemForm} from "../CreateItemForm.tsx";
 import {AppBar, Box, Container, CssBaseline, Grid, IconButton, Paper, Switch, Toolbar} from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu'
-import {containerSx} from "./Todolist.styles.ts";
-import {NavButton} from "./NavButton.ts";
+import {containerSx} from "../Todolist.styles.ts";
+import {NavButton} from "../NavButton.ts";
 import {createTheme, ThemeProvider} from '@mui/material/styles';
 import {amber, indigo} from "@mui/material/colors";
 import {
     changeTodolistFilterAC,
     changeTodolistTitleAC, createTodolistAC,
     deleteTodolistAC,
-} from "./model/todolists-reducer.ts";
+} from "../model/todolists-reducer.ts";
 import {
     changeTaskStatusAC,
     changeTaskTitleAC,
     createTaskAC,
     deleteTaskAC,
-} from "./model/tasks-reducer.ts";
-import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "./app/store.ts";
+} from "../model/tasks-reducer.ts";
+import {useAppDispatch} from "../common/hooks/useAppDispatch.ts";
+import {useAppSelector} from "../common/hooks/useAppSelector.ts";
+import {selectTodolists} from "../model/todolists-selectors.ts";
+import {selectTasks} from "../model/tasks-selectors.ts";
 
 export type TasksState = Record<string, TaskType[]>
 
@@ -35,9 +37,9 @@ export type TodolistType = {
 
 function App() {
 
-    const todolists = useSelector<RootState, TodolistType[]>((state) => state.todolists)
-    const tasks = useSelector<RootState, TasksState>((state) => state.tasks)
-    const dispatch = useDispatch()
+    const todolists = useAppSelector(selectTodolists)
+    const tasks = useAppSelector(selectTasks)
+    const dispatch = useAppDispatch()
 
     // CRUD tasks
 

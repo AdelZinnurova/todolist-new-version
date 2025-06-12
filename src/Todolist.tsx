@@ -1,6 +1,6 @@
 // import {Button} from "./Button.tsx";
 import {ChangeEvent} from "react";
-import {FilterValues} from "./App.tsx";
+import {FilterValues} from "./app/App.tsx";
 import {CreateItemForm} from "./CreateItemForm.tsx";
 import {EditableSpan} from "./EditableSpan.tsx";
 import {Box, Button, Checkbox, IconButton, List, ListItem} from "@mui/material";

@@ -66,7 +66,7 @@ function App() {
     // CRUD todolist
 
     const deleteTodolist = (todolistId: string) => {
-        const action = deleteTodolistAC(todolistId)
+        const action = deleteTodolistAC({id: todolistId})
         dispatch(action)
     }
 

@@ -37,7 +37,7 @@ test('должен добавить пустой массив для новог�
 })
 
 test('должен удалить свойство с тасками при удалении тудулиста', () => {
-    const endState = tasksReducer(startState, deleteTodolistAC('todolistId2'))
+    const endState = tasksReducer(startState, deleteTodolistAC({id: 'todolistId2'}))
 
     expect(Object.keys(endState)).toHaveLength(1)
     expect(endState.todolistId2).toBeUndefined()

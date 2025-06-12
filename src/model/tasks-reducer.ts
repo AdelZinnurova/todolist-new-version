@@ -1,6 +1,11 @@
 import {TasksStateType} from "../app/App.tsx";
-import {CreateTodolistActionType, DeleteTodolistActionType} from "./todolists-reducer.ts";
-import {v1} from "uuid";
+import {
+    createTodolistAC,
+    CreateTodolistActionType,
+    deleteTodolistAC,
+    DeleteTodolistActionType
+} from "./todolists-reducer.ts";
+import {createReducer, nanoid} from "@reduxjs/toolkit";
 
 const initialState: TasksStateType = {}
 
@@ -18,17 +23,18 @@ type ActionType =
     | ChangeTasksTitleActionType
 
 
-export const tasksReducer = (tasks: TasksStateType = initialState, action: ActionType) => {
+export const tasksReducer = createReducer(initialState, (builder) => {
+    builder
+        .addCase(deleteTodolistAC, (state, action) => {
+            delete state[action.payload.id];
+        })
+        .addCase(createTodolistAC, (state, action) => {
+            state[action.payload.id] = []
+        })
+})
+
+export const tasksReducer2 = (tasks: TasksStateType = initialState, action: ActionType) => {
     switch (action.type) {
-        case "create_todolist": {
-            const {id} = action.payload
-            return {...tasks, [id]: []}
-        }
-        case "delete_todolist": {
-            const {id} = action.payload
-            delete tasks[id]
-            return {...tasks}
-        }
         case "delete_tasks": {
             const {taskId, todolistId} = action.payload
             return {
@@ -40,7 +46,7 @@ export const tasksReducer = (tasks: TasksStateType = initialState, action: Actio
             const {todolistId, title} = action.payload
             return {
                 ...tasks,
-                [todolistId]: [...tasks[todolistId], {id: v1(), title: title, isDone: false}]
+                [todolistId]: [...tasks[todolistId], {id: nanoid(), title: title, isDone: false}]
             }
         }
         case "change_task_status": {

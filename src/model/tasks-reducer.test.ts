@@ -7,9 +7,9 @@ import {
     deleteTaskAC,
     tasksReducer
 } from './tasks-reducer'
-import { TasksStateType } from '../app/App.tsx'
+import { TasksState } from '../app/App.tsx'
 
-let startState: TasksStateType
+let startState: TasksState
 
 beforeEach(() => {
     startState = {
